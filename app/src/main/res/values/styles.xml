@@ -1,0 +1,43 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@drawable/background</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:textColor">@android:color/white</item>
+
+    </style>
+
+    <style name="AppTheme.FullScreen">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="CircleButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/blue_circle_button_background</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:gravity">center</item>
+        <item name="textAllCaps">false</item>
+
+        <item name="android:textSize">26sp</item>
+        <item name="android:layout_width">146dp</item>
+        <item name="android:layout_height">146dp</item>
+    </style>
+
+    <style name="CircleButton.Large">
+        <item name="android:textSize">32sp</item>
+        <item name="android:layout_width">184dp</item>
+        <item name="android:layout_height">184dp</item>
+    </style>
+
+    <style name="CircleButton.Warning">
+        <item name="android:background">@drawable/red_circle_button_background</item>
+    </style>
+
+</resources>

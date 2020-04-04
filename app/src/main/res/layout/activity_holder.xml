@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/background"
+    >
+<!--    top status bar start  -->
+    <View
+        android:id="@+id/vTopStatus"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <LinearLayout
+        android:id="@+id/llPatientDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/vTopStatus"
+        app:layout_constraintTop_toTopOf="@id/vTopStatus"
+        app:layout_constraintBottom_toBottomOf="@id/vTopStatus"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        >
+        <TextView
+            android:id="@+id/tvPatientName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            tools:text="Patient Name"
+            />
+        <TextView
+            android:id="@+id/tvPatientID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Patient ID: XXXXX"
+            android:textSize="14sp"
+            />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Pre-use Check"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="@id/vTopStatus"
+        app:layout_constraintEnd_toEndOf="@id/vTopStatus"
+        app:layout_constraintTop_toTopOf="@id/vTopStatus"
+        app:layout_constraintBottom_toBottomOf="@id/vTopStatus"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Thursday 02-04-2020"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/vTopStatus"
+        app:layout_constraintTop_toTopOf="@id/llPatientDetails"
+        android:layout_marginEnd="16dp"
+        />
+<!--    top status bar end  -->
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/vTopStatus"
+        app:layout_constraintBottom_toTopOf="@id/vBottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+<!--    bottom navigation bar start  -->
+    <View
+        android:id="@+id/vBottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="@color/bottomNavigationBarColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/nocca_logo"
+        app:layout_constraintBottom_toBottomOf="@id/vBottomNavigation"
+        app:layout_constraintEnd_toEndOf="@id/vBottomNavigation"
+        app:layout_constraintTop_toTopOf="@id/vBottomNavigation"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvHome"
+        android:drawableStart="@drawable/triangle_back"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:drawablePadding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="34dp"
+        app:layout_constraintBottom_toBottomOf="@id/vBottomNavigation"
+        app:layout_constraintTop_toTopOf="@id/vBottomNavigation"
+        app:layout_constraintStart_toStartOf="@id/vBottomNavigation"
+        />
+<!--    bottom navigation bar end  -->
+</androidx.constraintlayout.widget.ConstraintLayout>

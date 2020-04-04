@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvInletPumpTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvOutletPumpTest"
+        app:layout_constraintStart_toStartOf="@id/tvPressureTest"
+        android:text="@string/inlet_pump_test"
+        android:textSize="22sp"
+        android:fontFamily="sans-serif-light"
+        />
+
+    <TextView
+        android:id="@+id/tvOutletPumpTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvInletPumpTest"
+        app:layout_constraintBottom_toTopOf="@id/tvLeadTubeTest"
+        app:layout_constraintStart_toStartOf="@id/tvPressureTest"
+        android:text="@string/outlet_pump_test"
+        android:textSize="22sp"
+        android:fontFamily="sans-serif-light"
+        />
+
+    <TextView
+        android:id="@+id/tvLeadTubeTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvOutletPumpTest"
+        app:layout_constraintBottom_toTopOf="@id/tvBuzzer"
+        app:layout_constraintStart_toStartOf="@id/tvPressureTest"
+        android:text="@string/lead_tube_test"
+        android:textSize="22sp"
+        android:fontFamily="sans-serif-light"
+        />
+
+    <TextView
+        android:id="@+id/tvBuzzer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvLeadTubeTest"
+        app:layout_constraintBottom_toTopOf="@id/tvPressureTest"
+        app:layout_constraintStart_toStartOf="@id/tvPressureTest"
+        android:text="@string/buzzer"
+        android:textSize="22sp"
+        android:fontFamily="sans-serif-light"
+        />
+
+    <TextView
+        android:id="@+id/tvPressureTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/pressure_transducer_test"
+        android:textSize="22sp"
+        android:layout_marginStart="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/pbPressureTest"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBuzzer" />
+
+    <ProgressBar
+        android:id="@+id/pbInletPumpTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvOutletPumpTest"
+        app:layout_constraintEnd_toEndOf="@id/pbPressureTest"
+        app:layout_constraintStart_toStartOf="@id/pbPressureTest"
+        />
+
+    <ProgressBar
+        android:id="@+id/pbOutletPumpTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvInletPumpTest"
+        app:layout_constraintBottom_toTopOf="@id/tvLeadTubeTest"
+        app:layout_constraintEnd_toEndOf="@id/pbPressureTest"
+        app:layout_constraintStart_toStartOf="@id/pbPressureTest"
+        />
+
+    <ProgressBar
+        android:id="@+id/pbLeadTubeTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvOutletPumpTest"
+        app:layout_constraintBottom_toTopOf="@id/tvBuzzer"
+        app:layout_constraintEnd_toEndOf="@id/pbPressureTest"
+        app:layout_constraintStart_toStartOf="@id/pbPressureTest"
+        />
+
+    <ProgressBar
+        android:id="@+id/pbBuzzerTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvLeadTubeTest"
+        app:layout_constraintBottom_toTopOf="@id/tvPressureTest"
+        app:layout_constraintEnd_toEndOf="@id/pbPressureTest"
+        app:layout_constraintStart_toStartOf="@id/pbPressureTest"
+        />
+
+    <ProgressBar
+        android:id="@+id/pbPressureTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvPressureTest"
+        app:layout_constraintTop_toBottomOf="@id/tvBuzzer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/ivInletPumpTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_passed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvOutletPumpTest"
+        app:layout_constraintEnd_toEndOf="@id/pbPressureTest"
+        app:layout_constraintStart_toStartOf="@id/pbPressureTest"
+        android:visibility="invisible"
+        />
+
+
+    <ImageView
+        android:id="@+id/ivOutletPumpTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_passed"
+        app:layout_constraintTop_toBottomOf="@id/tvInletPumpTest"
+        app:layout_constraintBottom_toTopOf="@id/tvLeadTubeTest"
+        app:layout_constraintEnd_toEndOf="@id/pbPressureTest"
+        app:layout_constraintStart_toStartOf="@id/pbPressureTest"
+        android:visibility="invisible"
+        />
+
+    <ImageView
+        android:id="@+id/ivLeadTubeTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_passed"
+        app:layout_constraintTop_toBottomOf="@id/tvOutletPumpTest"
+        app:layout_constraintBottom_toTopOf="@id/tvBuzzer"
+        app:layout_constraintEnd_toEndOf="@id/pbPressureTest"
+        app:layout_constraintStart_toStartOf="@id/pbPressureTest"
+        android:visibility="invisible"
+        />
+
+    <ImageView
+        android:id="@+id/ivBuzzerTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_passed"
+        app:layout_constraintTop_toBottomOf="@id/tvLeadTubeTest"
+        app:layout_constraintBottom_toTopOf="@id/tvPressureTest"
+        app:layout_constraintEnd_toEndOf="@id/pbPressureTest"
+        app:layout_constraintStart_toStartOf="@id/pbPressureTest"
+        android:visibility="invisible"
+        />
+
+    <ImageView
+        android:id="@+id/ivPressureTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="200dp"
+        android:src="@drawable/ic_passed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvPressureTest"
+        app:layout_constraintTop_toBottomOf="@id/tvBuzzer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

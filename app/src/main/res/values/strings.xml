@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Nocca Ventilator</string>
+    <string name="home">Home</string>
+    <string name="patient_id__">Patient ID: %1$s</string>
+    <string name="patient_info">Patient\nInfo</string>
+    <string name="pre_use_check">Pre-Use\nCheck</string>
+    <string name="ventilation_mode">Ventilation\nMode</string>
+    <string name="standby">Standby</string>
+    <string name="last_four_days">Last 4\nDays</string>
+    <string name="clear_data">Clear\nData</string>
+    <string name="add_new_patient">Add New\nPatient</string>
+    <string name="cpap">CPAP</string>
+    <string name="pc_ac">PC-AC</string>
+    <string name="pc_cmv">PC-CMV</string>
+    <string name="inlet_pump_test">Inlet pump test</string>
+    <string name="outlet_pump_test">Outlet pump test</string>
+    <string name="lead_tube_test">Lead tube test</string>
+    <string name="buzzer">Buzzer</string>
+    <string name="pressure_transducer_test">Pressure transducer test</string>
+</resources>
