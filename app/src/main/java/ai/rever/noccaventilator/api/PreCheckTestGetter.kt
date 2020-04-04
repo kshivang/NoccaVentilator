@@ -20,7 +20,18 @@ fun dummyTest(completion: (Boolean) -> Unit) {
 
 }
 
-var inletPumpTestObservable = Observable.create<Boolean> {
+val inletPumpTestObservable get() = Observable.create<Boolean> {
+    dummyTest { result ->
+        it.onNext(result)
+    }
+    it.setCancellable {  }
+}.apply {
+    subscribeOn(Schedulers.io())
+    observeOn(AndroidSchedulers.mainThread())
+}
+
+
+val outletPumpTestObservable get() = Observable.create<Boolean> {
     dummyTest { result ->
         it.onNext(result)
     }
@@ -29,8 +40,7 @@ var inletPumpTestObservable = Observable.create<Boolean> {
     observeOn(AndroidSchedulers.mainThread())
 }
 
-
-var outletPumpTestObservable = Observable.create<Boolean> {
+val onLeadTubeTestObservable get() = Observable.create<Boolean> {
     dummyTest { result ->
         it.onNext(result)
     }
@@ -39,7 +49,7 @@ var outletPumpTestObservable = Observable.create<Boolean> {
     observeOn(AndroidSchedulers.mainThread())
 }
 
-var onLeadTubeTestObservable = Observable.create<Boolean> {
+val onBuzzerTestObservable get() = Observable.create<Boolean> {
     dummyTest { result ->
         it.onNext(result)
     }
@@ -48,16 +58,7 @@ var onLeadTubeTestObservable = Observable.create<Boolean> {
     observeOn(AndroidSchedulers.mainThread())
 }
 
-var onBuzzerTestObservable = Observable.create<Boolean> {
-    dummyTest { result ->
-        it.onNext(result)
-    }
-}.apply {
-    subscribeOn(Schedulers.io())
-    observeOn(AndroidSchedulers.mainThread())
-}
-
-var onPressureTestObservable = Observable.create<Boolean> {
+val onPressureTestObservable get() = Observable.create<Boolean> {
     dummyTest { result ->
         it.onNext(result)
     }
