@@ -17,4 +17,6 @@
     <string name="lead_tube_test">Lead tube test</string>
     <string name="buzzer">Buzzer</string>
     <string name="pressure_transducer_test">Pressure transducer test</string>
+    <string name="device_admin_description">Nocca app is admin app for this device</string>
+    <string name="grant_admin">Nocca Ventilator app locks the device to work consistently on device</string>
 </resources>
