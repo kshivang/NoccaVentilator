@@ -19,4 +19,10 @@
     <string name="pressure_transducer_test">Pressure transducer test</string>
     <string name="device_admin_description">Nocca app is admin app for this device</string>
     <string name="grant_admin">Nocca Ventilator app locks the device to work consistently on device</string>
+    <string name="start">Start</string>
+    <string name="set_alarm">Set Alarm</string>
+    <string name="pip">PIP</string>
+    <string name="peep">PEEP</string>
+    <string name="vte">VTe</string>
+    <string name="rr">RR</string>
 </resources>

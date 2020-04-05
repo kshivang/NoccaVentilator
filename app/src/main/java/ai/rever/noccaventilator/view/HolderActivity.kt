@@ -2,13 +2,15 @@ package ai.rever.noccaventilator.view
 
 import ai.rever.noccaventilator.R
 import ai.rever.noccaventilator.api.patientDetailsGetter
+import ai.rever.noccaventilator.model.BottomStatus
 import ai.rever.noccaventilator.model.Patient
 import ai.rever.noccaventilator.view.common.BaseActivity
 import ai.rever.noccaventilator.view.home.HomeFragment
 import android.os.Bundle
 import android.view.View
-import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxjava3.kotlin.addTo
 import kotlinx.android.synthetic.main.activity_holder.*
+import kotlinx.android.synthetic.main.layout_bottom_status.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,7 +20,7 @@ class HolderActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_holder)
 
-        tvHome.setOnClickListener {
+        btHome.setOnClickListener {
             moveToHome()
         }
 
@@ -35,7 +37,7 @@ class HolderActivity: BaseActivity() {
     }
 
     fun showHomeButton(show: Boolean = true) {
-        tvHome.visibility = if (show) View.VISIBLE else View.INVISIBLE
+        btHome.visibility = if (show) View.VISIBLE else View.INVISIBLE
     }
 
     fun setTitleText(title: String) {
@@ -51,5 +53,21 @@ class HolderActivity: BaseActivity() {
         SimpleDateFormat("EEEE dd-MM-yyyy", Locale.ENGLISH).apply {
             tvDate.text = format(Date())
         }
+    }
+
+    fun showBottomStatus(show: Boolean) {
+        lBottomStatus.visibility = if (show) View.VISIBLE else View.INVISIBLE
+    }
+
+    fun setBottomNavButton(startText: String, click: View.OnClickListener) {
+        btStart.text = startText
+        btStart.setOnClickListener(click)
+    }
+
+    fun setBottomStatus(data: BottomStatus) {
+        tvPIP.text = "${data.pip}"
+        tvPEEP.text = "${data.peep}"
+        tvRR.text = "${data.rr}"
+        tvIE.text = "${data.ie}"
     }
 }
