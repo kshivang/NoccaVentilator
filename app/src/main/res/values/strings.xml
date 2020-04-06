@@ -25,4 +25,7 @@
     <string name="peep">PEEP</string>
     <string name="vte">VTe</string>
     <string name="rr">RR</string>
+    <string name="pt_graph">P-T Graph</string>
+    <string name="v_tgraph">V-T Graph</string>
+    <string name="flow_rate_n_i_min_t">Flow Rate\n(I/min) - T</string>
 </resources>

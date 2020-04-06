@@ -51,12 +51,13 @@
         android:id="@+id/pipDivider"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/tvPIPSide"
-        app:layout_constraintStart_toStartOf="@id/vSide"
-        app:layout_constraintEnd_toEndOf="@id/vSide"
         app:layout_constraintBottom_toTopOf="@+id/tvPEEPLabel"
-        />
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toBottomOf="@id/tvPIPSide" />
 
     <TextView
         android:id="@+id/tvPEEPLabel"
@@ -88,12 +89,13 @@
         android:id="@+id/peepDivider"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/tvPEEPSide"
-        app:layout_constraintStart_toStartOf="@id/vSide"
-        app:layout_constraintEnd_toEndOf="@id/vSide"
         app:layout_constraintBottom_toTopOf="@+id/tvVTeLabel"
-        />
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toBottomOf="@id/tvPEEPSide" />
 
     <TextView
         android:id="@+id/tvVTeLabel"
@@ -125,12 +127,13 @@
         android:id="@+id/vTeDivider"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/tvVTeSide"
-        app:layout_constraintStart_toStartOf="@id/vSide"
-        app:layout_constraintEnd_toEndOf="@id/vSide"
         app:layout_constraintBottom_toTopOf="@+id/tvRRLabel"
-        />
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toBottomOf="@id/tvVTeSide" />
 
     <TextView
         android:id="@+id/tvRRLabel"
