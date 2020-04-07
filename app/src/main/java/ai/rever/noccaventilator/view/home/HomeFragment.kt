@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.frament_home.*
 
 class HomeFragment: BaseFragment() {
 
+    override val title: String
+        get() = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,8 +24,6 @@ class HomeFragment: BaseFragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.frament_home, container, false)
     }
-
-    override val title: String get() = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

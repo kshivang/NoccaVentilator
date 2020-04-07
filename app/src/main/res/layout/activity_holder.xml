@@ -89,18 +89,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/nocca_logo"
-        app:layout_constraintBottom_toBottomOf="@id/vBottomNavigation"
-        app:layout_constraintEnd_toEndOf="@id/vBottomNavigation"
-        app:layout_constraintTop_toTopOf="@id/vBottomNavigation"
-        tools:ignore="ContentDescription" />
-
-    <TextView
-        android:id="@+id/tvHome"
+    <Button
+        android:id="@+id/btHome"
         android:drawableStart="@drawable/triangle_back"
         android:layout_gravity="center"
         android:gravity="center"
@@ -110,10 +100,35 @@
         android:text="@string/home"
         android:textSize="20sp"
         android:textColor="@android:color/black"
+        android:textAllCaps="false"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_marginStart="34dp"
         app:layout_constraintBottom_toBottomOf="@id/vBottomNavigation"
         app:layout_constraintTop_toTopOf="@id/vBottomNavigation"
         app:layout_constraintStart_toStartOf="@id/vBottomNavigation"
         />
-<!--    bottom navigation bar end  -->
+
+    <include
+        android:id="@+id/lBottomStatus"
+        layout="@layout/layout_bottom_status"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/vBottomNavigation"
+        app:layout_constraintEnd_toStartOf="@+id/ivLogo"
+        app:layout_constraintStart_toEndOf="@+id/btHome"
+        app:layout_constraintTop_toTopOf="@+id/vBottomNavigation" />
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/nocca_logo"
+        app:layout_constraintBottom_toBottomOf="@id/vBottomNavigation"
+        app:layout_constraintEnd_toEndOf="@id/vBottomNavigation"
+        app:layout_constraintTop_toTopOf="@id/vBottomNavigation"
+        tools:ignore="ContentDescription" />
+
+    <!--    bottom navigation bar end  -->
 </androidx.constraintlayout.widget.ConstraintLayout>

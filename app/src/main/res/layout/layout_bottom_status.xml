@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/activity_holder"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bottomNavigationBarColor">
+
+    <Button
+        android:id="@+id/btStart"
+        android:layout_width="115dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_bg"
+        android:text="@string/start"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvPIPLabel"
+        />
+
+    <TextView
+        android:id="@+id/tvPIPLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PIP"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/btStart"
+        app:layout_constraintEnd_toStartOf="@+id/tvPEEPLabel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvPIPSide"
+        />
+
+
+    <TextView
+        android:id="@+id/tvPEEPLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PEEP"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/tvPIPLabel"
+        app:layout_constraintEnd_toStartOf="@+id/tvRRLabel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvPEEPSide"
+        />
+
+    <TextView
+        android:id="@+id/tvRRLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RR"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/tvPEEPLabel"
+        app:layout_constraintEnd_toStartOf="@+id/tvIELabel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvRRSide"
+        />
+
+    <TextView
+        android:id="@+id/tvIELabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I:E"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/tvRRLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvIE"
+        />
+
+    <TextView
+        android:id="@+id/tvPIP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="55"
+        android:textSize="26sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tvPIPLabel"
+        app:layout_constraintStart_toStartOf="@+id/tvPIPLabel"
+        app:layout_constraintEnd_toEndOf="@+id/tvPIPLabel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvPEEP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="55"
+        android:textSize="26sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tvPEEPLabel"
+        app:layout_constraintStart_toStartOf="@+id/tvPEEPLabel"
+        app:layout_constraintEnd_toEndOf="@+id/tvPEEPLabel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvRR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="55"
+        android:textSize="26sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tvRRLabel"
+        app:layout_constraintStart_toStartOf="@+id/tvRRLabel"
+        app:layout_constraintEnd_toEndOf="@+id/tvRRLabel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvIE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="55"
+        android:textSize="26sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tvIELabel"
+        app:layout_constraintStart_toStartOf="@+id/tvIELabel"
+        app:layout_constraintEnd_toEndOf="@+id/tvIELabel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

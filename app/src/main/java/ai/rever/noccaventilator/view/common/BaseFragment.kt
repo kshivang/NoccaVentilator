@@ -1,13 +1,18 @@
 package ai.rever.noccaventilator.view.common
 
+import ai.rever.noccaventilator.api.bottomStatusObservable
 import ai.rever.noccaventilator.view.HolderActivity
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
-import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.kotlin.addTo
 import org.jetbrains.anko.toast
 
 abstract class BaseFragment: Fragment() {
 
     abstract val title: String
+    open val showBottomStatus: Boolean = false
 
     val holderActivity get() = activity as? HolderActivity
 
@@ -39,10 +44,22 @@ abstract class BaseFragment: Fragment() {
      */
     open fun handleOnBackPressed() = false
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (showBottomStatus) {
+            bottomStatusObservable.subscribe {
+                runOnActive {
+                    holderActivity?.setBottomStatus(it)
+                }
+            }.addTo(compositeDisposable)
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         isFragmentActive = true
         holderActivity?.setTitleText(title)
+        holderActivity?.showBottomStatus(showBottomStatus)
     }
 
     var compositeDisposable =  CompositeDisposable()

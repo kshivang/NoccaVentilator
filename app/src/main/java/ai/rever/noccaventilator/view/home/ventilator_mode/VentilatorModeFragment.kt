@@ -2,7 +2,7 @@ package ai.rever.noccaventilator.view.home.ventilator_mode
 
 import ai.rever.noccaventilator.R
 import ai.rever.noccaventilator.view.common.BaseFragment
-import ai.rever.noccaventilator.view.home.precheck.PreCheckFragment
+import ai.rever.noccaventilator.view.home.ventilator_mode.ventilator_mode_details.VentilatorDetailsFragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,15 +26,15 @@ class VentilatorModeFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btPC_CVM.setOnClickListener {
-            toast("PC_CVM")
+            setFragment(VentilatorDetailsFragment("PC-CVM"))
         }
 
         btPC_AC.setOnClickListener {
-            toast("PC_AC")
+            setFragment(VentilatorDetailsFragment("PC-AC"))
         }
 
         btCPAP.setOnClickListener {
-            toast("CPAP")
+            setFragment(VentilatorDetailsFragment("CPAP"))
         }
     }
 }

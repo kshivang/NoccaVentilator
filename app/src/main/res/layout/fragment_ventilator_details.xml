@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/vSide"
+        />
+
+    <View
+        android:id="@+id/vSide"
+        android:layout_width="162dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvPIPLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/pip"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvPIPSide"
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPIPSide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="35"
+        android:textFontWeight="500"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/pipDivider"
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toBottomOf="@id/tvPIPLabel" />
+
+    <View
+        android:id="@+id/pipDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/tvPEEPLabel"
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toBottomOf="@id/tvPIPSide" />
+
+    <TextView
+        android:id="@+id/tvPEEPLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/peep"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvPEEPSide"
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toBottomOf="@id/pipDivider" />
+
+    <TextView
+        android:id="@+id/tvPEEPSide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="35"
+        android:textFontWeight="500"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/peepDivider"
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toBottomOf="@id/tvPEEPLabel" />
+
+    <View
+        android:id="@+id/peepDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/tvVTeLabel"
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toBottomOf="@id/tvPEEPSide" />
+
+    <TextView
+        android:id="@+id/tvVTeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/vte"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvVTeSide"
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toBottomOf="@id/peepDivider" />
+
+    <TextView
+        android:id="@+id/tvVTeSide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="35"
+        android:textFontWeight="500"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/vTeDivider"
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toBottomOf="@id/tvVTeLabel" />
+
+    <View
+        android:id="@+id/vTeDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/tvRRLabel"
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toBottomOf="@id/tvVTeSide" />
+
+    <TextView
+        android:id="@+id/tvRRLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/rr"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvRRSide"
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toBottomOf="@id/vTeDivider" />
+
+    <TextView
+        android:id="@+id/tvRRSide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="35"
+        android:textFontWeight="500"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/vSide"
+        app:layout_constraintStart_toStartOf="@id/vSide"
+        app:layout_constraintTop_toBottomOf="@id/tvRRLabel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
