@@ -96,8 +96,17 @@ open class BaseActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         requestLockPackage()
         fullScreen()
-        usbServiceRegister()
         backendStatusObserve()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        usbServiceRegister()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        usbServiceUnregister()
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -129,7 +138,6 @@ open class BaseActivity: AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.dispose()
-        usbServiceUnregister()
     }
 
     private fun DevicePolicyManager.requestLockTask(force: Boolean = false) {
