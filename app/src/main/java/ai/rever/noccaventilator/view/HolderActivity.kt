@@ -5,6 +5,7 @@ import ai.rever.noccaventilator.api.patientDetailsGetter
 import ai.rever.noccaventilator.model.BottomStatus
 import ai.rever.noccaventilator.model.Patient
 import ai.rever.noccaventilator.view.common.BaseActivity
+import ai.rever.noccaventilator.view.home.DebugFragment
 import ai.rever.noccaventilator.view.home.HomeFragment
 import android.os.Bundle
 import android.view.View
@@ -22,6 +23,10 @@ class HolderActivity: BaseActivity() {
 
         btHome.setOnClickListener {
             moveToHome()
+        }
+
+        ivLogo.setOnClickListener {
+            setFragment(DebugFragment())
         }
 
         setFragment(HomeFragment(), true)

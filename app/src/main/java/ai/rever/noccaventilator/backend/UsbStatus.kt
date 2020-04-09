@@ -1,0 +1,6 @@
+package ai.rever.noccaventilator.backend
+
+enum class UsbStatus {
+    READY, NOT_SUPPORTED, NO_USB, PERMISSION_GRANTED, PERMISSION_NOT_GRANTED,
+    DISCONNECTED, CDC_DRIVER_NOT_WORKING, USB_DEVICE_NOT_WORKING
+}

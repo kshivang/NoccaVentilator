@@ -1,6 +1,11 @@
 package ai.rever.noccaventilator.view.common
 
 import ai.rever.noccaventilator.R
+import ai.rever.noccaventilator.api.ctcChangeGetter
+import ai.rever.noccaventilator.api.dsrChangeGetter
+import ai.rever.noccaventilator.api.usbStatusGetter
+import ai.rever.noccaventilator.backend.UsbServiceManager.usbServiceRegister
+import ai.rever.noccaventilator.backend.UsbServiceManager.usbServiceUnregister
 import ai.rever.noccaventilator.receiver.AdminReceiver
 import android.accounts.AccountManager
 import android.app.admin.DevicePolicyManager
@@ -14,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.kotlin.addTo
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 
@@ -90,6 +96,8 @@ open class BaseActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         requestLockPackage()
         fullScreen()
+        usbServiceRegister()
+        backendStatusObserve()
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -121,6 +129,7 @@ open class BaseActivity: AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.dispose()
+        usbServiceUnregister()
     }
 
     private fun DevicePolicyManager.requestLockTask(force: Boolean = false) {
@@ -139,6 +148,20 @@ open class BaseActivity: AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         requestLockPackage()
+    }
+
+    private fun backendStatusObserve() {
+        usbStatusGetter.subscribe {
+            toast("Usb Status: $it")
+        }.addTo(compositeDisposable)
+
+        ctcChangeGetter.subscribe {
+            toast("ctc change: $it")
+        }.addTo(compositeDisposable)
+
+        dsrChangeGetter.subscribe {
+            toast("dsr change: $it")
+        }.addTo(compositeDisposable)
     }
 
     private fun requestLockPackage() {
