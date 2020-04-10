@@ -1,9 +1,12 @@
 package ai.rever.noccaventilator.api
 
 import io.reactivex.rxjava3.core.*
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.internal.operators.observable.ObservableJust
+import io.reactivex.rxjava3.kotlin.toCompletable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
-import org.reactivestreams.Subscriber
-import org.reactivestreams.Subscription
+import org.jetbrains.anko.doAsyncResult
+import java.util.function.BiFunction
 
 /**
  * This is example, which illustrate
@@ -11,18 +14,16 @@ import org.reactivestreams.Subscription
  */
 
 class DetectSignalOperator(private val startDelimiter: String,
-                           private val endDelimiter: String): FlowableOperator<String, String> {
-
-    override fun apply(subscriber: Subscriber<in String>?): Subscriber<in String> {
-        return OP(startDelimiter, endDelimiter, subscriber)
+                           private val endDelimiter: String): ObservableOperator<String, String> {
+    override fun apply(observer: Observer<in String>?): Observer<in String> {
+        return OP(startDelimiter, endDelimiter, observer)
     }
 
     inner class OP(private val startDelimiter: String,
                    private val endDelimiter: String,
-                   private val child: Subscriber<in String>?)
-        : FlowableSubscriber<String>, Subscription {
+                   private val child: Observer<in String>?): Observer<String>, Disposable {
 
-        var subscription: Subscription? = null
+        private var disposable: Disposable? = null
         private var str = ""
         private var reading = false
 
@@ -30,13 +31,12 @@ class DetectSignalOperator(private val startDelimiter: String,
             child?.onComplete()
         }
 
-        override fun onSubscribe(s: Subscription?) {
-            this.subscription = s
-            child?.onSubscribe(this)
+        override fun onSubscribe(d: Disposable?) {
+            disposable = d
         }
 
         override fun onNext(t: String?) {
-            Flowable.fromIterable(t?.split(""))
+            Observable.fromIterable(t?.split(""))
                 .map { currChar ->
                 if (currChar == startDelimiter) {
                     reading = true
@@ -55,27 +55,26 @@ class DetectSignalOperator(private val startDelimiter: String,
             }.blockingSubscribe()
         }
 
-        override fun onError(t: Throwable?) {
-            child?.onError(t)
+        override fun onError(e: Throwable?) {
+            child?.onError(e)
         }
 
-        override fun cancel() {
-            subscription?.cancel()
+        override fun isDisposed(): Boolean {
+            return disposable?.isDisposed ?: true
         }
 
-        override fun request(n: Long) {
-            subscription?.request(n)
+        override fun dispose() {
+            disposable?.dispose()
         }
     }
-
 }
 
 fun main() {
     val subject: BehaviorSubject<String> = BehaviorSubject.create()
-    subject.toFlowable(BackpressureStrategy.LATEST)
-        .lift(DetectSignalOperator("*", "#")).subscribe {
-            println(it)
-        }
+    subject
+        .lift(DetectSignalOperator("*", "#"))
+        .firstOrErrorStage()
+        .thenAccept { println(it) }
 
     subject.onNext("*goijgeoij#goijgeoij*")
     subject.onNext("goeijge#ogijeoi*gjiogei")

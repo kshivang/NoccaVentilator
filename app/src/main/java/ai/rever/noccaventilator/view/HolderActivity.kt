@@ -1,6 +1,7 @@
 package ai.rever.noccaventilator.view
 
 import ai.rever.noccaventilator.R
+import ai.rever.noccaventilator.api.IDLE_SIGNAL
 import ai.rever.noccaventilator.api.patientDetailsGetter
 import ai.rever.noccaventilator.model.BottomStatus
 import ai.rever.noccaventilator.model.Patient
@@ -70,9 +71,9 @@ class HolderActivity: BaseActivity() {
     }
 
     fun setBottomStatus(data: BottomStatus) {
-        tvPIP.text = "${data.pip}"
-        tvPEEP.text = "${data.peep}"
-        tvRR.text = "${data.rr}"
-        tvIE.text = "${data.ie}"
+        tvPIP.text = if (data.pip == IDLE_SIGNAL) "--" else  "${data.pip}"
+        tvPEEP.text = if (data.peep == IDLE_SIGNAL) "--" else "${data.peep}"
+        tvRR.text = if (data.rr == IDLE_SIGNAL) "--" else "${data.rr}"
+        tvIE.text = if (data.ie == IDLE_SIGNAL) "--" else "${data.ie}"
     }
 }

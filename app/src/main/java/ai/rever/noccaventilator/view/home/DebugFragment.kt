@@ -1,7 +1,7 @@
 package ai.rever.noccaventilator.view.home
 
 import ai.rever.noccaventilator.R
-import ai.rever.noccaventilator.api.parsedSignalGetter
+import ai.rever.noccaventilator.api.signalFlowable
 import ai.rever.noccaventilator.backend.UsbServiceManager
 import ai.rever.noccaventilator.view.common.BaseFragment
 import android.os.Bundle
@@ -27,7 +27,7 @@ class DebugFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        UsbServiceManager.messageFlowable
+        UsbServiceManager.messageObservable
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 runOnActive {
@@ -35,7 +35,7 @@ class DebugFragment : BaseFragment() {
                 }
             }.addTo(compositeDisposable)
 
-        parsedSignalGetter("*", "#").subscribe{
+        signalFlowable.subscribe{
             runOnActive {
                 tvParsedValue.text = "ParsedValue: $it"
             }

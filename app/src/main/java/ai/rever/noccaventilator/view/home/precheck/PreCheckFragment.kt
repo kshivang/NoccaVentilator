@@ -27,6 +27,8 @@ class PreCheckFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        requestPreCheck
+
         inletPumpTestObservable
             .subscribe(::onInletPumpTestComplete)
             .addTo(compositeDisposable)

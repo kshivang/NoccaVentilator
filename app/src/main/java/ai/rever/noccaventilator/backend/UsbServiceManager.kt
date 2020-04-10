@@ -7,6 +7,7 @@ import android.content.ServiceConnection
 import android.os.IBinder
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Observable
 import org.jetbrains.anko.intentFor
 import java.lang.ref.WeakReference
 import kotlin.collections.ArrayList
@@ -33,10 +34,9 @@ object UsbServiceManager {
     /**
      * API start
      */
-    val messageFlowable: Flowable<String>
+    val messageObservable: Observable<String>
         get() = UsbServiceInternalManager
             .messageFromSerialPortSubject
-            .toFlowable(BackpressureStrategy.LATEST)
 
     val usbStatusFlowable: Flowable<UsbStatus>
         get() = UsbServiceInternalManager
@@ -53,7 +53,7 @@ object UsbServiceManager {
             .dsrChangeSubject
             .toFlowable(BackpressureStrategy.LATEST)
 
-    fun write(string: String) = run {
+    fun onCommand(string: String) = run {
         write(string.toByteArray())
     }
     /**

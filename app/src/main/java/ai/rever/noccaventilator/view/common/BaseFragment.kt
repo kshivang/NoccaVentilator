@@ -1,6 +1,6 @@
 package ai.rever.noccaventilator.view.common
 
-import ai.rever.noccaventilator.api.bottomStatusObservable
+import ai.rever.noccaventilator.api.bottomStatusFlowable
 import ai.rever.noccaventilator.view.HolderActivity
 import android.os.Bundle
 import android.view.View
@@ -47,7 +47,7 @@ abstract class BaseFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (showBottomStatus) {
-            bottomStatusObservable.subscribe {
+            bottomStatusFlowable.subscribe {
                 runOnActive {
                     holderActivity?.setBottomStatus(it)
                 }

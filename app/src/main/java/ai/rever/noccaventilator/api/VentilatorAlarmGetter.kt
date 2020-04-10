@@ -1,9 +1,21 @@
 package ai.rever.noccaventilator.api
 
-import ai.rever.noccaventilator.model.VentilatorAlarm
-import io.reactivex.rxjava3.core.Observable
 
-val ventilatorAlarmGetter: Observable<VentilatorAlarm>
-    get() = Observable.create {
-    it.onNext(VentilatorAlarm())
-}
+val pHighAlarmFlowable
+    get() = signalFlowable("v")
+
+val pLowAlarmFlowable
+    get() = signalFlowable("w")
+
+val vtHighAlarmFlowable
+    get() = signalFlowable("x")
+
+val vtLowAlarmFlowable
+    get() = signalFlowable("y")
+
+val rrHighAlarmFlowable
+    get() = signalFlowable("z")
+
+val rrLowAlarmFlowable
+    get() = signalFlowable("@")
+
