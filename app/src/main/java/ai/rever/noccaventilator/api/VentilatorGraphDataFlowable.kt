@@ -6,12 +6,12 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 val ptGraphEntryFlowable get() = run {
     val startSec = System.currentTimeMillis()
     val entries = ArrayList<Entry>()
-    valueSignalFlowable("P")
+    floatSignalFlowable("P")
         .map {
             if (it > 0) {
                 val secSinceStart = System.currentTimeMillis()
                     .run { ((this - startSec) / 1000.toFloat()) }
-                entries.add(Entry(secSinceStart, it.toFloat()))
+                entries.add(Entry(secSinceStart, it))
                 if (entries.size == 50) {
                     entries.removeAt(0)
                 }
@@ -23,7 +23,7 @@ val ptGraphEntryFlowable get() = run {
 val vtGraphDataFlowable get() = run {
     val startSec = System.currentTimeMillis()
     val entries = ArrayList<Entry>()
-    valueSignalFlowable("V")
+    floatSignalFlowable("V")
         .map {
             if (it > 0) {
                 val secSinceStart = System.currentTimeMillis()
@@ -40,7 +40,7 @@ val vtGraphDataFlowable get() = run {
 val frGraphDataFlowable get() = run {
     val startSec = System.currentTimeMillis()
     val entries = ArrayList<Entry>()
-    valueSignalFlowable("F")
+    floatSignalFlowable("F")
         .map {
             if (it > 0) {
                 val secSinceStart = System.currentTimeMillis()

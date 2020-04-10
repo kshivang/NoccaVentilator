@@ -28,7 +28,7 @@
         />
 
     <EditText
-        android:id="@+id/etPatient"
+        android:id="@+id/etPatientName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorWhite"
@@ -41,9 +41,9 @@
         android:id="@+id/tvPatientIDLabel"
         android:layout_width="480dp"
         android:layout_height="wrap_content"
-        android:text="@string/patient_name"
+        android:text="@string/patient_id"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/etPatient"
+        app:layout_constraintTop_toBottomOf="@+id/etPatientName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="40dp"
@@ -60,10 +60,15 @@
         />
 
     <Button
+        android:id="@+id/btSave"
         android:layout_width="115dp"
         android:layout_height="44dp"
         android:background="@drawable/button_bg"
-        app:layout_constraintTop_toBottomOf="@+id/"
+        android:layout_marginTop="40dp"
+        android:text="@string/save"
+        app:layout_constraintTop_toBottomOf="@+id/etPatientID"
+        app:layout_constraintStart_toStartOf="@+id/tvPatientNameLabel"
+        app:layout_constraintEnd_toEndOf="@+id/tvPatientNameLabel"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

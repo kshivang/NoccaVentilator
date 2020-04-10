@@ -30,4 +30,6 @@
     <string name="flow_rate_n_i_min_t">Flow Rate\n(I/min) - T</string>
     <string name="please_enter_new_patient_details">Please enter new patient details</string>
     <string name="patient_name">Patient Name</string>
+    <string name="save">Save</string>
+    <string name="patient_id">Patient ID</string>
 </resources>
