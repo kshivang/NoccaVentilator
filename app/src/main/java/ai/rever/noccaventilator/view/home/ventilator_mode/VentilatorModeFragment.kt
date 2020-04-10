@@ -30,21 +30,21 @@ class VentilatorModeFragment: BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btPC_CVM.setOnClickListener {
-            requestPC_CMV.thenAccept {
+            requestPC_CMV.thenAccept { runOnActive {
                 setFragment(VentilatorDetailsFragment("PC-CMC"))
-            }
+            } }
         }
 
         btPC_AC.setOnClickListener {
-            requestPC_AC.thenAccept {
+            requestPC_AC.thenAccept { runOnActive {
                 setFragment(VentilatorDetailsFragment("PC-AC"))
-            }
+            } }
         }
 
         btCPAP.setOnClickListener {
-            requestCPAP.thenAccept {
+            requestCPAP.thenAccept { runOnActive {
                 setFragment(VentilatorDetailsFragment("CPAP"))
-            }
+            } }
         }
     }
 }

@@ -3,10 +3,6 @@ package ai.rever.noccaventilator.api
 import com.github.mikephil.charting.data.Entry
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
-val randomData: Int get() {
-    return (40..60).random()
-}
-
 val ptGraphEntryFlowable get() = run {
     val startSec = System.currentTimeMillis()
     val entries = ArrayList<Entry>()

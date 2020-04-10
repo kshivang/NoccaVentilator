@@ -37,9 +37,9 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         holderActivity?.setBottomNavButton(getString(R.string.set_alarm), View.OnClickListener {
-            requestSetAlarm.thenAccept {
+            requestSetAlarm.thenAccept { runOnActive {
                 holderFragment?.setChildFragment(VentilatorAlarmFragment(title))
-            }
+            } }
         })
 
         setChartStyle(lcPT)
