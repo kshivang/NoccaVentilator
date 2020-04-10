@@ -36,7 +36,7 @@ fun floatSignalFlowable(signal: String) = run {
     signalFlowable
         .filter { it.contains(signal) }
         .map {
-            it.substring(signal.length).toIntOrNull() ?: IDLE_SIGNAL
+            it.substring(signal.length).toFloatOrNull() ?: IDLE_SIGNAL.toFloat()
         }
 }
 
