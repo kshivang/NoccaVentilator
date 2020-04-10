@@ -4,6 +4,7 @@ import ai.rever.noccaventilator.R
 import ai.rever.noccaventilator.api.ctcChangeGetter
 import ai.rever.noccaventilator.api.dsrChangeGetter
 import ai.rever.noccaventilator.api.usbStatusGetter
+import ai.rever.noccaventilator.backend.UsbServiceManager.messageObservable
 import ai.rever.noccaventilator.backend.UsbServiceManager.usbServiceRegister
 import ai.rever.noccaventilator.backend.UsbServiceManager.usbServiceUnregister
 import ai.rever.noccaventilator.receiver.AdminReceiver
@@ -121,7 +122,7 @@ open class BaseActivity: AppCompatActivity() {
                 if (isDeviceOwnerApp(packageName)) {
                     setLockTaskPackages(adminName, arrayOf(packageName));
                 }
-                requestLockTask(true)
+                requestLockTask()
             }
         }
     }
@@ -162,6 +163,11 @@ open class BaseActivity: AppCompatActivity() {
         dsrChangeGetter.subscribe {
             toast("dsr change: $it")
         }.addTo(compositeDisposable)
+
+        messageObservable.firstOrErrorStage()
+            .thenAccept {
+                dpm?.requestLockTask(true)
+            }
     }
 
     private fun requestLockPackage() {
@@ -183,7 +189,7 @@ open class BaseActivity: AppCompatActivity() {
                             if (isDeviceOwnerApp(packageName)) {
                                 setLockTaskPackages(adminName, arrayOf(packageName));
                             }
-                            requestLockTask(true)
+                            requestLockTask()
                         } catch (exp: Exception) {
                             e(TAG, "exception: $exp")
                         }
@@ -202,7 +208,7 @@ open class BaseActivity: AppCompatActivity() {
                     }
                     longToast("Nocca Ventilator cannot become device owner on this device, " +
                             "account: ${accounts.first().name} is admin!")
-                    requestLockTask(true)
+                    requestLockTask()
                 }
             }
         }
