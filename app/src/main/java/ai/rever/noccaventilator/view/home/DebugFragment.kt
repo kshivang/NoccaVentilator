@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_debug.*
 
 class DebugFragment : BaseFragment() {
     override val title: String
-        get() = "Debug Fragment"
+        get() = "Debug View"
 
     override fun onCreateView(
         inflater: LayoutInflater,

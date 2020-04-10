@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/please_enter_new_patient_details"
+        android:textSize="18sp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvPatientNameLabel"
+        android:layout_width="480dp"
+        android:layout_height="wrap_content"
+        android:text="@string/patient_name"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
+        />
+
+    <EditText
+        android:id="@+id/etPatient"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorWhite"
+        app:layout_constraintStart_toStartOf="@+id/tvPatientNameLabel"
+        app:layout_constraintEnd_toEndOf="@+id/tvPatientNameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvPatientNameLabel"
+        />
+
+    <TextView
+        android:id="@+id/tvPatientIDLabel"
+        android:layout_width="480dp"
+        android:layout_height="wrap_content"
+        android:text="@string/patient_name"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/etPatient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
+        />
+
+    <EditText
+        android:id="@+id/etPatientID"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorWhite"
+        app:layout_constraintStart_toStartOf="@+id/tvPatientNameLabel"
+        app:layout_constraintEnd_toEndOf="@+id/tvPatientNameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvPatientIDLabel"
+        />
+
+    <Button
+        android:layout_width="115dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_bg"
+        app:layout_constraintTop_toBottomOf="@+id/"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

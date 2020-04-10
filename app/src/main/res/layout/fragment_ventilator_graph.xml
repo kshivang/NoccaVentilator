@@ -18,7 +18,9 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lcPT"
         android:layout_width="0dp"
-        android:layout_height="130dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/graph_bg"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvPTLabel"
@@ -32,7 +34,6 @@
         android:text="@string/v_tgraph"
         android:textSize="17sp"
         android:rotation="-90"
-        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@+id/lcVT"
         app:layout_constraintBottom_toBottomOf="@+id/lcVT"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +41,9 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lcVT"
         android:layout_width="0dp"
-        android:layout_height="130dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/graph_bg"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/lcPT"
@@ -63,12 +66,14 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lcFR"
         android:layout_width="0dp"
-        android:layout_height="130dp"
-        android:visibility="gone"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/graph_bg"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/lcVT"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/lcPT"
         app:layout_constraintEnd_toEndOf="@id/lcPT"
+        app:layout_constraintStart_toStartOf="@id/lcPT"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

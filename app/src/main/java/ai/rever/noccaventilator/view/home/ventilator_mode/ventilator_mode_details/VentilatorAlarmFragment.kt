@@ -28,7 +28,7 @@ class VentilatorAlarmFragment(override val title: String) : BaseFragment() {
     override val showBottomStatus: Boolean
         get() = true
 
-    var ventilatorAlarmData = VentilatorAlarm(32,  21, 42,  21, 52,  25)
+    var ventilatorAlarmData = VentilatorAlarm(32,  32, 32,  32, 32,  32)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -141,9 +141,9 @@ class VentilatorAlarmFragment(override val title: String) : BaseFragment() {
         }
 
         holderActivity?.setBottomNavButton(getString(R.string.start), View.OnClickListener {
-            requestStart(ventilatorAlarmData).thenAccept {
+            requestStart(ventilatorAlarmData).thenAccept { runOnActive {
                 holderFragment?.setChildFragment(VentilatorGraphFragment(title))
-            }
+            } }
         })
     }
 }

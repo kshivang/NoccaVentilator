@@ -28,4 +28,6 @@
     <string name="pt_graph">P-T Graph</string>
     <string name="v_tgraph">V-T Graph</string>
     <string name="flow_rate_n_i_min_t">Flow Rate\n(I/min) - T</string>
+    <string name="please_enter_new_patient_details">Please enter new patient details</string>
+    <string name="patient_name">Patient Name</string>
 </resources>
