@@ -22,17 +22,21 @@ fun signalFlowable(vararg signals: String) = run {
     }
 }
 
-fun valueSignalFlowable(signal: String) = run {
+fun intSignalFlowable(signal: String) = run {
     signalFlowable
         .filter { it.contains(signal) }
         .map {
-            try {
-                it.substring(signal.length).toInt()
-            } catch (e: Exception) {
-                IDLE_SIGNAL
-            }
+            it.substring(signal.length).toIntOrNull() ?: IDLE_SIGNAL
         }
 }
 
 const val IDLE_SIGNAL = -1
+
+fun floatSignalFlowable(signal: String) = run {
+    signalFlowable
+        .filter { it.contains(signal) }
+        .map {
+            it.substring(signal.length).toFloatOrNull() ?: IDLE_SIGNAL.toFloat()
+        }
+}
 
