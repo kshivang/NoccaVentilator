@@ -1,26 +1,21 @@
 package ai.rever.noccaventilator.view.home.ventilator_mode.ventilator_mode_details
 
 import ai.rever.noccaventilator.R
-import ai.rever.noccaventilator.api.frGraphDataGetter
-import ai.rever.noccaventilator.api.ptGraphDataGetter
-import ai.rever.noccaventilator.api.vtGraphDataGetter
+import ai.rever.noccaventilator.api.*
 import ai.rever.noccaventilator.view.common.BaseFragment
 import android.graphics.Color
-import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.utils.ColorTemplate
 import io.reactivex.rxjava3.kotlin.addTo
 import kotlinx.android.synthetic.main.fragment_ventilator_graph.*
-import org.jetbrains.anko.colorAttr
-import org.jetbrains.anko.dip
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.cancelButton
 
 class VentilatorGraphFragment(override val title: String) : BaseFragment() {
 
@@ -40,55 +35,94 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         holderActivity?.setBottomNavButton(getString(R.string.set_alarm), View.OnClickListener {
-            holderFragment?.setChildFragment(VentilatorAlarmFragment(title))
+            requestSetAlarm.thenAccept {
+                holderFragment?.setChildFragment(VentilatorAlarmFragment(title))
+            }
         })
 
         setChartStyle(lcPT)
         setChartStyle(lcVT)
         setChartStyle(lcFR)
 
-        ptGraphDataGetter(title)
+        subscribeFlowable()
+    }
+
+    private val LineDataSet.lineData: LineData get() {
+        setDrawCircleHole(false)
+        setDrawCircles(false)
+        setDrawValues(false)
+        mode = LineDataSet.Mode.HORIZONTAL_BEZIER
+        return LineData(this)
+    }
+
+    private fun subscribeFlowable() {
+        ptGraphEntryFlowable
             .subscribe {
-                LineDataSet(it, "").run {
-                    setDrawCircleHole(false)
-                    setDrawCircles(false)
-                    setDrawValues(false)
-                    mode = LineDataSet.Mode.HORIZONTAL_BEZIER
-                    LineData(this)
-                }.apply {
-                    lcPT.data = this
-                    lcPT.invalidate()
-                }
+                lcPT.data = LineDataSet(it, "").lineData
+                lcPT.invalidate()
             }.addTo(compositeDisposable)
 
-        vtGraphDataGetter(title)
+        vtGraphDataFlowable
             .subscribe {
-                LineDataSet(it, "").run {
-                    setDrawCircleHole(false)
-                    setDrawCircles(false)
-                    setDrawValues(false)
-                    mode = LineDataSet.Mode.HORIZONTAL_BEZIER
-                    LineData(this)
-                }.apply {
-                    lcVT.data = this
-                    lcVT.invalidate()
+                if (lcVT.visibility != View.VISIBLE) {
+                    lcVT.visibility = View.VISIBLE
+                    tvVTLabel.visibility = View.VISIBLE
                 }
+                lcVT.data = LineDataSet(it, "").lineData
+                lcVT.invalidate()
             }.addTo(compositeDisposable)
 
-        frGraphDataGetter(title)
+        frGraphDataFlowable
             .subscribe {
-                LineDataSet(it, "").run {
-                    setDrawCircleHole(false)
-                    setDrawCircles(false)
-                    setDrawValues(false)
-                    mode = LineDataSet.Mode.HORIZONTAL_BEZIER
-                    LineData(this)
-                }.apply {
-                    lcFR.data = this
-                    lcFR.invalidate()
+                if (lcFR.visibility != View.VISIBLE) {
+                    lcFR.visibility = View.VISIBLE
+                    tvFRLabel.visibility = View.VISIBLE
                 }
+                lcFR.data = LineDataSet(it, "").lineData
+                lcFR.invalidate()
             }.addTo(compositeDisposable)
+
+        pHighAlarmFlowable
+            .subscribe {
+                showAlert("P high alarm")
+            }
+
+        pLowAlarmFlowable
+            .subscribe {
+                showAlert("P low alarm")
+            }
+
+        vtHighAlarmFlowable
+            .subscribe {
+                showAlert("vt high alarm")
+            }
+
+        vtLowAlarmFlowable
+            .subscribe {
+                showAlert("vt low alarm")
+            }
+
+        rrHighAlarmFlowable
+            .subscribe {
+                showAlert("rr high alarm")
+            }
+
+        rrLowAlarmFlowable
+            .subscribe {
+                showAlert("rr low alarm")
+            }
+    }
+
+    private fun showAlert(message: String) {
+        context?.alert(message) {
+            cancelButton {
+                holderActivity?.moveToHome()
+            }
+        }?.onCancelled {
+            holderActivity?.moveToHome()
+        }
     }
 
     private fun setChartStyle(chart: LineChart) {
