@@ -1,16 +1,24 @@
 package ai.rever.noccaventilator.api
 
-val inletPumpTestObservable get() = signalFlowable("ik", "in")
-    .map { it == "ik" }
+import io.reactivex.rxjava3.annotations.NonNull
+import io.reactivex.rxjava3.core.Flowable
 
-val outletPumpTestObservable get() = signalFlowable("ok", "on")
-    .map { it == "ok" }
+val inletPumpTestObservable: @NonNull Flowable<Boolean>
+    get() = signalFlowable("ik", "in")
+        .map { it == "ik" }
 
-val onLeadTubeTestObservable get() = signalFlowable("lk", "ln")
-    .map { it == "lk" }
+val outletPumpTestObservable: @NonNull Flowable<Boolean>
+    get() = signalFlowable("ok", "on")
+        .map { it == "ok" }
 
-val onBuzzerTestObservable get() = signalFlowable("bk", "bn")
-    .map { it == "bk" }
+val onLeadTubeTestObservable: @NonNull Flowable<Boolean>
+    get() = signalFlowable("lk", "ln")
+        .map { it == "lk" }
 
-val onPressureTestObservable get() = signalFlowable("tk", "tn")
-    .map { it == "tk" }
+val onBuzzerTestObservable: @NonNull Flowable<Boolean>
+    get() = signalFlowable("bk", "bn")
+        .map { it == "bk" }
+
+val onPressureTestObservable: @NonNull Flowable<Boolean>
+    get() = signalFlowable("tk", "tn")
+        .map { it == "tk" }

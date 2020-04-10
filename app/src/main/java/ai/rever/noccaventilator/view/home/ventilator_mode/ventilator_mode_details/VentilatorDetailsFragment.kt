@@ -1,6 +1,7 @@
 package ai.rever.noccaventilator.view.home.ventilator_mode.ventilator_mode_details
 
 import ai.rever.noccaventilator.R
+import ai.rever.noccaventilator.api.requestSetAlarm
 import ai.rever.noccaventilator.view.common.BaseFragment
 import android.os.Bundle
 import android.text.SpannableString
@@ -24,7 +25,12 @@ class VentilatorDetailsFragment(override val title: String) : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setChildFragment(VentilatorGraphFragment(title))
+
+        // Todo: Doubt whether here request set alarm is need or not
+        requestSetAlarm.thenAccept { runOnActive {
+            setChildFragment(VentilatorAlarmFragment(title))
+        } }
+
         setLabel()
     }
 

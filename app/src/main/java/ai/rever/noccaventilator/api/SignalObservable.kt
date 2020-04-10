@@ -2,7 +2,9 @@ package ai.rever.noccaventilator.api
 
 import ai.rever.noccaventilator.backend.UsbServiceManager
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.BackpressureStrategy
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.lang.Exception
 
@@ -14,15 +16,15 @@ private fun parsedSignalFlowable(startDelimiter: String, endDelimiter: String)
         .toFlowable(BackpressureStrategy.LATEST)
 
 
-val signalFlowable get() = parsedSignalFlowable("*", "#")
+val signalFlowable: @NonNull Flowable<String> get() = parsedSignalFlowable("*", "#")
 
-fun signalFlowable(vararg signals: String) = run {
+fun signalFlowable(vararg signals: String): @NonNull Flowable<String> = run {
     signalFlowable.filter {
         signals.any { signal -> it == signal }
     }
 }
 
-fun intSignalFlowable(signal: String) = run {
+fun intSignalFlowable(signal: String): @NonNull Flowable<Int> = run {
     signalFlowable
         .filter { it.contains(signal) }
         .map {
@@ -32,7 +34,7 @@ fun intSignalFlowable(signal: String) = run {
 
 const val IDLE_SIGNAL = -1
 
-fun floatSignalFlowable(signal: String) = run {
+fun floatSignalFlowable(signal: String): @NonNull Flowable<Float> = run {
     signalFlowable
         .filter { it.contains(signal) }
         .map {
