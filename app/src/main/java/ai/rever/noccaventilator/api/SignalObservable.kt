@@ -26,7 +26,7 @@ fun signalFlowable(vararg signals: String): @NonNull Flowable<String> = run {
 
 fun intSignalFlowable(signal: String): @NonNull Flowable<Int> = run {
     signalFlowable
-        .filter { it.contains(signal) }
+        .filter { it.startsWith(signal) }
         .map {
             it.substring(signal.length).toIntOrNull() ?: IDLE_SIGNAL
         }

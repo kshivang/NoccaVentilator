@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -37,7 +36,7 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         holderActivity?.setBottomNavButton(getString(R.string.set_alarm), View.OnClickListener {
-            requestSetAlarm.thenAccept { runOnActive {
+            requestStopGraphData.thenAccept { runOnActive {
                 holderFragment?.setChildFragment(VentilatorAlarmFragment(title))
             } }
         })
@@ -47,6 +46,20 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
         setChartStyle(lcFR)
 
         subscribeFlowable()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        holderActivity?.setHomeClick()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        holderActivity?.setHomeClick(View.OnClickListener {
+            requestStopGraphData.thenAccept {
+                holderActivity?.moveToHome()
+            }
+        })
     }
 
     private val LineDataSet.lineData: LineData get() {
@@ -116,12 +129,14 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
     }
 
     private fun showAlert(message: String) {
-        context?.alert(message) {
-            cancelButton {
+        requestStopGraphData.thenAccept {
+            context?.alert(message) {
+                cancelButton {
+                    holderActivity?.moveToHome()
+                }
+            }?.onCancelled {
                 holderActivity?.moveToHome()
             }
-        }?.onCancelled {
-            holderActivity?.moveToHome()
         }
     }
 
@@ -135,6 +150,8 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
             setDrawLabels(false)
             setDrawGridLines(true)
             gridColor = Color.WHITE
+            isGranularityEnabled = true
+            granularity = 1.toFloat()
         }
         chart.axisRight.isEnabled = false
         chart.axisLeft.run {
@@ -144,6 +161,5 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
             textColor = Color.WHITE
             textSize = 13f
         }
-
     }
 }
