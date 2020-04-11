@@ -23,7 +23,7 @@ val requestPC_AC: @NonNull CompletionStage<String> get() = onCommand("a", "ak")
 
 val requestCPAP: @NonNull CompletionStage<String> get() = onCommand("p", "pk")
 
-val requestSetAlarm: @NonNull CompletionStage<String> get() = onCommand("j", "jk")
+val requestStopGraphData: @NonNull CompletionStage<String> get() = onCommand("j", "jk")
 
 fun requestStart(alarmData: VentilatorAlarm): @NonNull CompletionStage<String> =
     alarmData.run {

@@ -22,9 +22,7 @@ class HolderActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_holder)
 
-        btHome.setOnClickListener {
-            moveToHome()
-        }
+        setHomeClick()
 
         ivLogo.setOnClickListener {
             setFragment(DebugFragment())
@@ -59,6 +57,10 @@ class HolderActivity: BaseActivity() {
         SimpleDateFormat("EEEE dd-MM-yyyy", Locale.ENGLISH).apply {
             tvDate.text = format(Date())
         }
+    }
+
+    fun setHomeClick(onClick: View.OnClickListener = View.OnClickListener { moveToHome() }) {
+        btHome.setOnClickListener(onClick)
     }
 
     fun showBottomStatus(show: Boolean) {

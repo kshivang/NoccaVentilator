@@ -28,7 +28,7 @@ class VentilatorAlarmFragment(override val title: String) : BaseFragment() {
     override val showBottomStatus: Boolean
         get() = true
 
-    var ventilatorAlarmData = VentilatorAlarm(32,  32, 32,  32, 32,  32)
+    private val ventilatorAlarmData get() = holderFragment?.alarmData ?: VentilatorAlarm()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,7 +70,7 @@ class VentilatorAlarmFragment(override val title: String) : BaseFragment() {
         }
     }
 
-    private fun setAlarmData() {
+    fun setAlarmData() {
         tvPHigh.text = "${ventilatorAlarmData.pHigh}"
         tvPLow.text = "${ventilatorAlarmData.pLow}"
         tvVTeHigh.text = "${ventilatorAlarmData.vTelHigh}"
