@@ -36,9 +36,9 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         holderActivity?.setBottomNavButton(getString(R.string.set_alarm), View.OnClickListener {
-            requestStopGraphData.thenAccept { runOnActive {
+            requestStopGraphData.subscribe { runOnActive {
                 holderFragment?.setChildFragment(VentilatorAlarmFragment(title))
-            } }
+            } }.addTo(compositeDisposable)
         })
 
         setChartStyle(lcPT)
@@ -56,9 +56,9 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
     override fun onResume() {
         super.onResume()
         holderActivity?.setHomeClick(View.OnClickListener {
-            requestStopGraphData.thenAccept {
+            requestStopGraphData.subscribe {
                 holderActivity?.moveToHome()
-            }
+            }.addTo(compositeDisposable)
         })
     }
 
@@ -129,7 +129,7 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
     }
 
     private fun showAlert(message: String) {
-        requestStopGraphData.thenAccept {
+        requestStopGraphData.subscribe {
             context?.alert(message) {
                 cancelButton {
                     holderActivity?.moveToHome()
@@ -137,7 +137,7 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
             }?.onCancelled {
                 holderActivity?.moveToHome()
             }
-        }
+        }.addTo(compositeDisposable)
     }
 
     private fun setChartStyle(chart: LineChart) {

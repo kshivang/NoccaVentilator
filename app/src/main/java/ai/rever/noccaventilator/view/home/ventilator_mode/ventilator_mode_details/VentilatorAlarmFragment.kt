@@ -10,6 +10,7 @@ import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import io.reactivex.rxjava3.kotlin.addTo
 import kotlinx.android.synthetic.main.fragment_ventilator_alarm.*
 
 class VentilatorAlarmFragment(override val title: String) : BaseFragment() {
@@ -141,9 +142,9 @@ class VentilatorAlarmFragment(override val title: String) : BaseFragment() {
         }
 
         holderActivity?.setBottomNavButton(getString(R.string.start), View.OnClickListener {
-            requestStart(ventilatorAlarmData).thenAccept { runOnActive {
+            requestStart(ventilatorAlarmData).subscribe { runOnActive {
                 holderFragment?.setChildFragment(VentilatorGraphFragment(title))
-            } }
+            } }.addTo(compositeDisposable)
         })
     }
 }

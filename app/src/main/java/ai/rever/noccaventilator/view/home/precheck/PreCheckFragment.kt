@@ -26,9 +26,6 @@ class PreCheckFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        requestPreCheck
-
         inletPumpTestObservable
             .subscribe(::onInletPumpTestComplete)
             .addTo(compositeDisposable)
@@ -47,6 +44,10 @@ class PreCheckFragment: BaseFragment() {
 
         onPressureTestObservable
             .subscribe(::onPressureTestComplete)
+            .addTo(compositeDisposable)
+
+        requestPreCheck
+            .subscribe()
             .addTo(compositeDisposable)
     }
 

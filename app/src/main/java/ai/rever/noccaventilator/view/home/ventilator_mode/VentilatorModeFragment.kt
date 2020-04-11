@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import io.reactivex.rxjava3.kotlin.addTo
 import kotlinx.android.synthetic.main.fragment_ventilator_mode.*
 
 class VentilatorModeFragment: BaseFragment() {
@@ -30,21 +31,21 @@ class VentilatorModeFragment: BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btPC_CVM.setOnClickListener {
-            requestPC_CMV.thenAccept { runOnActive {
+            requestPC_CMV.subscribe { runOnActive {
                 setFragment(VentilatorDetailsFragment("PC-CMC"))
-            } }
+            } }.addTo(compositeDisposable)
         }
 
         btPC_AC.setOnClickListener {
-            requestPC_AC.thenAccept { runOnActive {
+            requestPC_AC.subscribe { runOnActive {
                 setFragment(VentilatorDetailsFragment("PC-AC"))
-            } }
+            } }.addTo(compositeDisposable)
         }
 
         btCPAP.setOnClickListener {
-            requestCPAP.thenAccept { runOnActive {
+            requestCPAP.subscribe { runOnActive {
                 setFragment(VentilatorDetailsFragment("CPAP"))
-            } }
+            } }.addTo(compositeDisposable)
         }
     }
 }
