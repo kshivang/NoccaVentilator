@@ -32,4 +32,12 @@
     <string name="patient_name">Patient Name</string>
     <string name="save">Save</string>
     <string name="patient_id">Patient ID</string>
+    <string name="name">Name</string>
+    <string name="date_time">Date-Time</string>
+    <string name="identifier">Identifier</string>
+    <string name="operation">Operation</string>
+    <string name="data">Data</string>
+    <string name="delete">Delete</string>
+    <string name="type_admin_password_to_proceed">Type admin password to proceed</string>
+    <string name="password">Password</string>
 </resources>

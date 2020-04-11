@@ -5,4 +5,5 @@
     <color name="colorAccent">#1a85c8</color>
     <color name="bottomNavigationBarColor">#c0c0c0</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorWhite40">#66FFFFFF</color>
 </resources>

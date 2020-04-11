@@ -8,6 +8,7 @@ import ai.rever.noccaventilator.backend.UsbServiceManager.messageObservable
 import ai.rever.noccaventilator.backend.UsbServiceManager.usbServiceRegister
 import ai.rever.noccaventilator.backend.UsbServiceManager.usbServiceUnregister
 import ai.rever.noccaventilator.receiver.AdminReceiver
+import ai.rever.noccaventilator.room.LocalRoomDB
 import android.accounts.AccountManager
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
@@ -95,11 +96,20 @@ open class BaseActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        LocalRoomDB.initialize(this)
         requestLockPackage()
         fullScreen()
         usbServiceRegister()
         backendStatusObserve()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        LocalRoomDB.destroy()
+        compositeDisposable.dispose()
+        usbServiceUnregister()
+    }
+
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
@@ -127,11 +137,6 @@ open class BaseActivity: AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.dispose()
-        usbServiceUnregister()
-    }
 
     private fun DevicePolicyManager.requestLockTask(force: Boolean = false) {
         val isPermitted = isLockTaskPermitted(packageName)
@@ -168,6 +173,16 @@ open class BaseActivity: AppCompatActivity() {
             .thenAccept {
                 dpm?.requestLockTask(true)
             }
+    }
+
+    fun requestStandBy() {
+        dpm?.apply {
+            try {
+                if (isAdminActive(adminName)) {
+                    lockNow()
+                }
+            } catch (e: java.lang.Exception) {}
+        }
     }
 
     private fun requestLockPackage() {

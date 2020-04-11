@@ -2,9 +2,9 @@ package ai.rever.noccaventilator.view
 
 import ai.rever.noccaventilator.R
 import ai.rever.noccaventilator.api.IDLE_SIGNAL
-import ai.rever.noccaventilator.api.patientDetailsGetter
 import ai.rever.noccaventilator.model.BottomStatus
-import ai.rever.noccaventilator.model.Patient
+import ai.rever.noccaventilator.model.PatientData
+import ai.rever.noccaventilator.room.lastPatientFlowable
 import ai.rever.noccaventilator.view.common.BaseActivity
 import ai.rever.noccaventilator.view.home.DebugFragment
 import ai.rever.noccaventilator.view.home.HomeFragment
@@ -30,9 +30,9 @@ class HolderActivity: BaseActivity() {
 
         setFragment(HomeFragment(), true)
 
-        patientDetailsGetter
-            .subscribe(::setPatientDetails)
-            .addTo(compositeDisposable)
+        lastPatientFlowable
+            ?.subscribe(::setPatientDetails)
+            ?.addTo(compositeDisposable)
     }
 
     override fun onResume() {
@@ -48,9 +48,9 @@ class HolderActivity: BaseActivity() {
         tvTitle.text = title
     }
 
-    private fun setPatientDetails(patient: Patient) {
-        tvPatientName.text = patient.name
-        tvPatientID.text = getString(R.string.patient_id__, patient.id)
+    private fun setPatientDetails(patientData: PatientData) {
+        tvPatientName.text = patientData.name
+        tvPatientID.text = getString(R.string.patient_id__, patientData.id)
     }
 
     private fun setDate() {
