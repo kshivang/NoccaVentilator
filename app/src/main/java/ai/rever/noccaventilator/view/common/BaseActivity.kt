@@ -157,12 +157,17 @@ open class BaseActivity: AppCompatActivity() {
         requestLockPackage()
     }
 
+    var usbStatus: UsbStatus = UsbStatus.NO_USB
+
     private fun backendStatusObserve() {
         usbStatusGetter.subscribe {
             toast("Usb Status: $it")
-            if (it == UsbStatus.PERMISSION_GRANTED) {
+            usbStatus = it
+            if (it == UsbStatus.PERMISSION_GRANTED
+                || it == UsbStatus.READY) {
                 dpm?.requestLockTask(true)
             } else {
+                moveToHome()
                 stopLockTask()
             }
         }.addTo(compositeDisposable)

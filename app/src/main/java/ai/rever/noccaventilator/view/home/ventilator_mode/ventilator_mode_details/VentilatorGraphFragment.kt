@@ -2,6 +2,7 @@ package ai.rever.noccaventilator.view.home.ventilator_mode.ventilator_mode_detai
 
 import ai.rever.noccaventilator.R
 import ai.rever.noccaventilator.api.*
+import ai.rever.noccaventilator.backend.UsbStatus
 import ai.rever.noccaventilator.view.common.BaseFragment
 import android.graphics.Color
 import android.os.Bundle
