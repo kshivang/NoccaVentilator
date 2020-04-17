@@ -7,6 +7,7 @@ import ai.rever.noccaventilator.api.usbStatusGetter
 import ai.rever.noccaventilator.backend.UsbServiceManager.messageObservable
 import ai.rever.noccaventilator.backend.UsbServiceManager.usbServiceRegister
 import ai.rever.noccaventilator.backend.UsbServiceManager.usbServiceUnregister
+import ai.rever.noccaventilator.backend.UsbStatus
 import ai.rever.noccaventilator.receiver.AdminReceiver
 import ai.rever.noccaventilator.room.LocalRoomDB
 import android.accounts.AccountManager
@@ -159,6 +160,11 @@ open class BaseActivity: AppCompatActivity() {
     private fun backendStatusObserve() {
         usbStatusGetter.subscribe {
             toast("Usb Status: $it")
+            if (it == UsbStatus.PERMISSION_GRANTED) {
+                dpm?.requestLockTask(true)
+            } else {
+                stopLockTask()
+            }
         }.addTo(compositeDisposable)
 
         ctcChangeGetter.subscribe {
@@ -168,11 +174,6 @@ open class BaseActivity: AppCompatActivity() {
         dsrChangeGetter.subscribe {
             toast("dsr change: $it")
         }.addTo(compositeDisposable)
-
-        messageObservable.firstOrErrorStage()
-            .thenAccept {
-                dpm?.requestLockTask(true)
-            }
     }
 
     fun requestStandBy() {
