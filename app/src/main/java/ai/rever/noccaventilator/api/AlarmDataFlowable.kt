@@ -2,16 +2,16 @@ package ai.rever.noccaventilator.api
 
 import ai.rever.noccaventilator.model.VentilatorAlarm
 import io.reactivex.rxjava3.annotations.NonNull
+import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.kotlin.Flowables
-import java.util.concurrent.CompletionStage
 
-val alarmDataFlowable: @NonNull CompletionStage<VentilatorAlarm>
+val alarmDataFlowable: @NonNull Maybe<VentilatorAlarm>
     get() = Flowables.combineLatest(alarmPHighFlowable, alarmPLowFlowable,
     alarmVTHighFlowable, alarmVTLowFlowable, alarmRRHighFlowable, alarmRRLowFlowable
 ) { pHigh, pLow, vTHHigh, vTHLow, rrHigh, rrLow ->
         requestStopAlarmData()
         VentilatorAlarm(pHigh, pLow, vTHHigh, vTHLow, rrHigh, rrLow)
-    }.firstOrErrorStage()
+    }.firstElement()
 
 private val alarmPHighFlowable get() = intSignalFlowable("c")
     .startWithItem(IDLE_SIGNAL)

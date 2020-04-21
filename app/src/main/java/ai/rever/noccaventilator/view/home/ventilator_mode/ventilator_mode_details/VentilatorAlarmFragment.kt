@@ -73,10 +73,10 @@ class VentilatorAlarmFragment(override val title: String) : BaseFragment() {
     }
 
     private fun getAlarmData() {
-        alarmDataFlowable.thenAccept {
+        alarmDataFlowable.subscribe {
             ventilatorAlarmData = it
             setAlarmData()
-        }
+        }.addTo(compositeDisposable)
     }
 
     private fun setAlarmData() {

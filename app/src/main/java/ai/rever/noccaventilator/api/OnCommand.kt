@@ -6,6 +6,8 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
@@ -20,17 +22,18 @@ private fun onCommand(command: String, repeatCount: Int = 1) {
 
 private fun onCommand(command: String,  vararg confirmationCommand: String) = run {
     Completable.create { completable ->
-        val disposable = Observable.interval(0,
-            KEEP_COMMANDING_EVERY_MS, TimeUnit.MILLISECONDS)
+        val compositeDisposable = CompositeDisposable()
+        Observable.interval(KEEP_COMMANDING_EVERY_MS, TimeUnit.MILLISECONDS)
             .subscribe {
                 onCommand(command)
-            }
-        completable.setDisposable(disposable)
+            }.addTo(compositeDisposable)
+
         signalFlowable(*confirmationCommand)
-            .firstOrErrorStage()
-            .thenAccept {
+            .firstElement().subscribe {
                 completable.onComplete()
-            }
+            }.addTo(compositeDisposable)
+
+        completable.setDisposable(compositeDisposable)
     }
 }.apply {
     subscribeOn(Schedulers.io())
