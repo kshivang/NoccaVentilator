@@ -150,9 +150,9 @@ class VentilatorAlarmFragment(override val title: String) : BaseFragment() {
         }
 
         holderActivity?.setBottomNavButton(getString(R.string.start), View.OnClickListener {
-            requestStart(ventilatorAlarmData).subscribe { runOnActive {
+            requestStart(ventilatorAlarmData).thenAccept { runOnActive {
                 holderFragment?.setChildFragment(VentilatorGraphFragment(title))
-            } }.addTo(compositeDisposable)
+            } }
         })
     }
 }

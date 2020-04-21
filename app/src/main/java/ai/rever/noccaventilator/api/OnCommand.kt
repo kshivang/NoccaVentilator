@@ -12,7 +12,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.CompletionStage
 import java.util.concurrent.TimeUnit
 
-const val KEEP_COMMANDING_EVERY_MS: Long = 500
+//const val KEEP_COMMANDING_EVERY_MS: Long = 500
 
 private fun onCommand(command: String, repeatCount: Int = 1) {
     (0 until repeatCount)
