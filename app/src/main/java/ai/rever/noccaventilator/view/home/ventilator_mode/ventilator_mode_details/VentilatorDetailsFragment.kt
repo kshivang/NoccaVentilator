@@ -1,8 +1,6 @@
 package ai.rever.noccaventilator.view.home.ventilator_mode.ventilator_mode_details
 
 import ai.rever.noccaventilator.R
-import ai.rever.noccaventilator.api.alarmDataFlowable
-import ai.rever.noccaventilator.model.VentilatorAlarm
 import ai.rever.noccaventilator.view.common.BaseFragment
 import android.os.Bundle
 import android.text.SpannableString
@@ -10,7 +8,6 @@ import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.reactivex.rxjava3.kotlin.addTo
 import kotlinx.android.synthetic.main.fragment_ventilator_details.*
 
 class VentilatorDetailsFragment(override val title: String) : BaseFragment() {
@@ -24,23 +21,12 @@ class VentilatorDetailsFragment(override val title: String) : BaseFragment() {
         return inflater.inflate(R.layout.fragment_ventilator_details, container, false)
     }
 
-    var alarmData: VentilatorAlarm = VentilatorAlarm()
-
     private var _childFragment: BaseFragment? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setChildFragment(VentilatorGraphFragment(title))
-
-        alarmDataFlowable.subscribe {
-            runOnActive {
-                alarmData = it
-                (_childFragment as? VentilatorAlarmFragment)
-                    ?.setAlarmData()
-            }
-        }.addTo(compositeDisposable)
-
 
         // Todo: Side screen not needed now
 //        setLabel()

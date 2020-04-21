@@ -15,7 +15,7 @@ val ptGraphEntryFlowable: @NonNull Flowable<java.util.ArrayList<Entry>>
                     val secSinceStart = System.currentTimeMillis()
                         .run { ((this - startSec) / 1000.toFloat()) }
                     entries.add(Entry(secSinceStart, it))
-                    if (entries.size == 100) {
+                    if (entries.size == 1000) {
                         entries.removeAt(0)
                     }
                 }

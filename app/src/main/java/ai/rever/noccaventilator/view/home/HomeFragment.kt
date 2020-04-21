@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import kotlinx.android.synthetic.main.frament_home.*
 
 class HomeFragment: BaseFragment() {
@@ -42,9 +41,10 @@ class HomeFragment: BaseFragment() {
         }
 
         btStandby.setOnClickListener {
-            holderActivity?.window?.attributes
-                ?.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_OFF
-            holderActivity?.requestStandBy()
+//            holderActivity?.window?.attributes
+//                ?.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_OFF
+//            holderActivity?.requestStandBy()
+            holderActivity?.requestScreenToggle()
         }
     }
 

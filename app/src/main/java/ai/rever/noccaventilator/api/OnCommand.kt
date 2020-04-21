@@ -11,11 +11,14 @@ import java.util.concurrent.TimeUnit
 
 const val KEEP_COMMANDING_EVERY_MS: Long = 500
 
-private fun onCommand(command: String) {
-    UsbServiceManager.onCommand("*$command#")
+private fun onCommand(command: String, repeatCount: Int = 1) {
+    (0 until repeatCount)
+        .map { "*$command#" }
+        .reduce { acc, next -> acc + next }
+        .let { UsbServiceManager.onCommand(it) }
 }
 
-private fun onCommand(command: String, vararg confirmationCommand: String) = run {
+private fun onCommand(command: String,  vararg confirmationCommand: String) = run {
     Completable.create { completable ->
         val disposable = Observable.interval(0,
             KEEP_COMMANDING_EVERY_MS, TimeUnit.MILLISECONDS)
@@ -46,11 +49,15 @@ val requestCPAP: @NonNull Completable get() = onCommand("p", "pk")
 
 val requestStopGraphData: @NonNull Completable get() = onCommand("j", "jk")
 
+fun requestStopAlarmData() = onCommand("b")
+
+fun requestHome() = onCommand("&", 10)
+
 fun requestStart(alarmData: VentilatorAlarm): @NonNull Completable =
     alarmData.run {
         onCommand(
-            "h${pHigh}n${pLow}q${vTelHigh}r${vTelLow}s${rrHigh}u${rrLow}",
-            "hk"
+            "h${pHigh}#*n${pLow}#*q${vTelHigh}#*r${vTelLow}#*s${rrHigh}#*u${rrLow}",
+            "hk", "P"
         )
     }
 

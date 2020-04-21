@@ -3,6 +3,7 @@ package ai.rever.noccaventilator.view.common
 import ai.rever.noccaventilator.R
 import ai.rever.noccaventilator.api.ctcChangeGetter
 import ai.rever.noccaventilator.api.dsrChangeGetter
+import ai.rever.noccaventilator.api.requestHome
 import ai.rever.noccaventilator.api.usbStatusGetter
 import ai.rever.noccaventilator.backend.UsbServiceManager.messageObservable
 import ai.rever.noccaventilator.backend.UsbServiceManager.usbServiceRegister
@@ -66,6 +67,7 @@ open class BaseActivity: AppCompatActivity() {
     }
 
     fun moveToHome() {
+        requestHome()
         supportFragmentManager.popBackStack(NON_HOME_BACK_STACK,
             FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
@@ -78,7 +80,6 @@ open class BaseActivity: AppCompatActivity() {
                 if (!isHomeFragment) addToBackStack(NON_HOME_BACK_STACK)
                 commit()
             }
-
     }
 
     val compositeDisposable = CompositeDisposable()

@@ -40,6 +40,10 @@ class HolderActivity: BaseActivity() {
         setDate()
     }
 
+    fun requestScreenToggle() {
+        cl.keepScreenOn = !cl.keepScreenOn
+    }
+
     fun showHomeButton(show: Boolean = true) {
         btHome.visibility = if (show) View.VISIBLE else View.INVISIBLE
     }

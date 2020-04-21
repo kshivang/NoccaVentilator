@@ -1,6 +1,7 @@
 package ai.rever.noccaventilator.view.home.ventilator_mode.ventilator_mode_details
 
 import ai.rever.noccaventilator.R
+import ai.rever.noccaventilator.api.alarmDataFlowable
 import ai.rever.noccaventilator.api.requestStart
 import ai.rever.noccaventilator.model.VentilatorAlarm
 import ai.rever.noccaventilator.view.common.BaseFragment
@@ -29,13 +30,13 @@ class VentilatorAlarmFragment(override val title: String) : BaseFragment() {
     override val showBottomStatus: Boolean
         get() = true
 
-    private val ventilatorAlarmData get() = holderFragment?.alarmData ?: VentilatorAlarm()
+    private var ventilatorAlarmData: VentilatorAlarm = VentilatorAlarm()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setLabel()
-        setAlarmData()
+        getAlarmData()
         setClickListener()
     }
 
@@ -71,7 +72,14 @@ class VentilatorAlarmFragment(override val title: String) : BaseFragment() {
         }
     }
 
-    fun setAlarmData() {
+    private fun getAlarmData() {
+        alarmDataFlowable.thenAccept {
+            ventilatorAlarmData = it
+            setAlarmData()
+        }
+    }
+
+    private fun setAlarmData() {
         tvPHigh.text = "${ventilatorAlarmData.pHigh}"
         tvPLow.text = "${ventilatorAlarmData.pLow}"
         tvVTeHigh.text = "${ventilatorAlarmData.vTelHigh}"

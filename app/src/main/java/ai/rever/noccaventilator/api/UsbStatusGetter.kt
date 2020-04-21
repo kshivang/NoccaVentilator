@@ -10,4 +10,3 @@ val usbStatusGetter: @NonNull Flowable<UsbStatus>
     get() = UsbServiceManager.usbStatusFlowable
     .observeOn(AndroidSchedulers.mainThread())
 
-
