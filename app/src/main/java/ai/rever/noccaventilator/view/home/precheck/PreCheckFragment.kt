@@ -46,9 +46,7 @@ class PreCheckFragment: BaseFragment() {
             .subscribe(::onPressureTestComplete)
             .addTo(compositeDisposable)
 
-        requestPreCheck
-            .subscribe()
-            .addTo(compositeDisposable)
+        requestPreCheck.thenAccept { }
     }
 
     private fun onInletPumpTestComplete(passed: Boolean) = runOnActive {
