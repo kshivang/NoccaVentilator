@@ -12,6 +12,7 @@ import org.jetbrains.anko.intentFor
 import java.lang.ref.WeakReference
 import kotlin.collections.ArrayList
 
+
 object UsbServiceManager {
 
     /**
@@ -54,7 +55,8 @@ object UsbServiceManager {
             .toFlowable(BackpressureStrategy.LATEST)
 
     fun onCommand(string: String) = run {
-        write(string.toByteArray())
+        if (DummyHandler.isActive) DummyHandler.onCommand(string)
+        else write(string.toByteArray())
     }
     /**
      * Api end

@@ -5,18 +5,27 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Flowable
 
+const val dataResolutionSec: Float = 5f
+fun secSinceStart(startSec: Long) = System.currentTimeMillis().run {
+    ((this - startSec) / 1000.toFloat())
+}
+
 val ptGraphEntryFlowable: @NonNull Flowable<java.util.ArrayList<Entry>>
     get() = run {
         val startSec = System.currentTimeMillis()
         val entries = ArrayList<Entry>()
         floatSignalFlowable("P")
             .map {
-                if (it > 0) {
-                    val secSinceStart = System.currentTimeMillis()
-                        .run { ((this - startSec) / 1000.toFloat()) }
+                secSinceStart(startSec).let { secSinceStart ->
+                    val firstDataSec = secSinceStart - dataResolutionSec
                     entries.add(Entry(secSinceStart, it))
-                    if (entries.size == 1000) {
-                        entries.removeAt(0)
+                    entries.firstOrNull()?.apply {
+                        if (x > firstDataSec) {
+                            entries.add(Entry(firstDataSec, y))
+                        }
+                    }
+                    entries.removeIf { entry ->
+                        entry.x < firstDataSec
                     }
                 }
                 entries

@@ -2,11 +2,7 @@ package ai.rever.noccaventilator.api
 
 import io.reactivex.rxjava3.core.*
 import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.internal.operators.observable.ObservableJust
-import io.reactivex.rxjava3.kotlin.toCompletable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
-import org.jetbrains.anko.doAsyncResult
-import java.util.function.BiFunction
 
 /**
  * This is example, which illustrate
@@ -25,7 +21,7 @@ class DetectSignalOperator(private val startDelimiter: String,
 
         private var disposable: Disposable? = null
         private var str = ""
-        private var reading = false
+        private var parsing = false
 
         override fun onComplete() {
             child?.onComplete()
@@ -39,15 +35,15 @@ class DetectSignalOperator(private val startDelimiter: String,
             Observable.fromIterable(t?.split(""))
                 .map { currChar ->
                 if (currChar == startDelimiter) {
-                    reading = true
+                    parsing = true
                 } else if (currChar == endDelimiter) {
-                    reading = false
+                    parsing = false
                     if (str.isNotEmpty()) {
                         child?.onNext(str)
                         str = ""
                     }
                 } else {
-                    if (reading) {
+                    if (parsing) {
                         str += currChar
                     }
                 }

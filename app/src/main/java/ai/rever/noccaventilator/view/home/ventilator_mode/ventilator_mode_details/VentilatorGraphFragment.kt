@@ -76,7 +76,8 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
             .subscribe {
                 lcPT.data = LineDataSet(it, "").lineData
                 lcPT.invalidate()
-            }.addTo(compositeDisposable)
+            }
+            .addTo(compositeDisposable)
 
         vtGraphDataFlowable
             .subscribe {
@@ -86,7 +87,8 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
                 }
                 lcVT.data = LineDataSet(it, "").lineData
                 lcVT.invalidate()
-            }.addTo(compositeDisposable)
+            }
+            .addTo(compositeDisposable)
 
         frGraphDataFlowable
             .subscribe {
@@ -96,37 +98,44 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
                 }
                 lcFR.data = LineDataSet(it, "").lineData
                 lcFR.invalidate()
-            }.addTo(compositeDisposable)
+            }
+            .addTo(compositeDisposable)
 
         pHighAlarmFlowable
             .subscribe {
                 showAlert("P high alarm")
             }
+            .addTo(compositeDisposable)
 
         pLowAlarmFlowable
             .subscribe {
                 showAlert("P low alarm")
             }
+            .addTo(compositeDisposable)
 
         vtHighAlarmFlowable
             .subscribe {
                 showAlert("vt high alarm")
             }
+            .addTo(compositeDisposable)
 
         vtLowAlarmFlowable
             .subscribe {
                 showAlert("vt low alarm")
             }
+            .addTo(compositeDisposable)
 
         rrHighAlarmFlowable
             .subscribe {
                 showAlert("rr high alarm")
             }
+            .addTo(compositeDisposable)
 
         rrLowAlarmFlowable
             .subscribe {
                 showAlert("rr low alarm")
             }
+            .addTo(compositeDisposable)
     }
 
     private fun showAlert(message: String) {
@@ -144,6 +153,7 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
     private fun setChartStyle(chart: LineChart) {
         chart.legend.isEnabled = false
         chart.description.isEnabled = false
+        chart.setScaleEnabled(false)
         chart.setDrawMarkers(false)
         chart.setDrawBorders(true)
         chart.setBorderColor(Color.WHITE)
@@ -151,8 +161,6 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
             setDrawLabels(false)
             setDrawGridLines(true)
             gridColor = Color.WHITE
-            isGranularityEnabled = true
-            granularity = 1.toFloat()
         }
         chart.axisRight.isEnabled = false
         chart.axisLeft.run {
