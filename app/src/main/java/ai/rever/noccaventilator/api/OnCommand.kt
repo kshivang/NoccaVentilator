@@ -15,9 +15,11 @@ private fun onCommand(command: String, repeatCount: Int = 1) {
 }
 
 private fun onCommand(command: String, repeatCount: Int, vararg confirmationCommand: String) = run {
-    onCommand(command, repeatCount)
     signalFlowable(*confirmationCommand)
         .firstOrErrorStage()
+        .apply {
+            onCommand(command, repeatCount)
+        }
 }
 
 //private fun onCommand(command: String,  vararg confirmationCommand: String) = run {
@@ -53,7 +55,7 @@ val requestPC_AC: @NonNull CompletionStage<String>
 val requestCPAP: @NonNull CompletionStage<String>
     get() = onCommand("p", 1, "pk")
 
-val requestStopGraphData: @NonNull CompletionStage<String>
+val requestAlarmData: @NonNull CompletionStage<String>
     get() = onCommand("j", 1, "jk")
 
 fun requestStopAlarmData() = onCommand("b")

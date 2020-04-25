@@ -55,7 +55,7 @@ object UsbServiceManager {
             .toFlowable(BackpressureStrategy.LATEST)
 
     fun onCommand(string: String) = run {
-        if (DummyHandler.isActive) DummyHandler.onCommand(string)
+        if (Simulator.isActive) Simulator.onCommand(string)
         else write(string.toByteArray())
     }
     /**

@@ -2,7 +2,6 @@ package ai.rever.noccaventilator.view.home.ventilator_mode.ventilator_mode_detai
 
 import ai.rever.noccaventilator.R
 import ai.rever.noccaventilator.api.*
-import ai.rever.noccaventilator.backend.UsbStatus
 import ai.rever.noccaventilator.view.common.BaseFragment
 import android.graphics.Color
 import android.os.Bundle
@@ -37,7 +36,7 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         holderActivity?.setBottomNavButton(getString(R.string.set_alarm), View.OnClickListener {
-            requestStopGraphData.thenAccept { runOnActive {
+            requestAlarmData.thenAccept { runOnActive {
                 holderFragment?.setChildFragment(VentilatorAlarmFragment(title))
             } }
         })
@@ -57,9 +56,7 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
     override fun onResume() {
         super.onResume()
         holderActivity?.setHomeClick(View.OnClickListener {
-            requestStopGraphData.thenAccept {
-                holderActivity?.moveToHome()
-            }
+            holderActivity?.moveToHome()
         })
     }
 
@@ -139,14 +136,12 @@ class VentilatorGraphFragment(override val title: String) : BaseFragment() {
     }
 
     private fun showAlert(message: String) {
-        requestStopGraphData.thenAccept {
-            context?.alert(message) {
-                cancelButton {
-                    holderActivity?.moveToHome()
-                }
-            }?.onCancelled {
+        context?.alert(message) {
+            cancelButton {
                 holderActivity?.moveToHome()
             }
+        }?.onCancelled {
+            holderActivity?.moveToHome()
         }
     }
 

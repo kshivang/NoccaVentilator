@@ -14,19 +14,13 @@ val alarmDataFlowable: @NonNull Maybe<VentilatorAlarm>
     }.firstElement()
 
 private val alarmPHighFlowable get() = intSignalFlowable("c")
-    .startWithItem(IDLE_SIGNAL)
 
 private val alarmPLowFlowable get() = intSignalFlowable("q")
-    .startWithItem(IDLE_SIGNAL)
 
 private val alarmVTHighFlowable get() = intSignalFlowable("r")
-    .startWithItem(IDLE_SIGNAL)
 
 private val alarmVTLowFlowable get() = intSignalFlowable("s")
-    .startWithItem(IDLE_SIGNAL)
 
 private val alarmRRHighFlowable get() = intSignalFlowable("u")
-    .startWithItem(IDLE_SIGNAL)
 
 private val alarmRRLowFlowable get() = intSignalFlowable("?")
-    .startWithItem(IDLE_SIGNAL)
